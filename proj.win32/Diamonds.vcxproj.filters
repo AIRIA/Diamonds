@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="win32">
+      <UniqueIdentifier>{84a8ebd7-7cf0-47f6-b75e-d441df67da40}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes">
+      <UniqueIdentifier>{bb6c862e-70e9-49d9-81b7-3829a6f50471}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\components">
+      <UniqueIdentifier>{24e0d950-e20a-4079-810e-9c6ff52c1f06}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\base">
+      <UniqueIdentifier>{df8a372b-4fdb-4a50-a001-47672528bf31}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\scenes">
+      <UniqueIdentifier>{0aeb07c0-6400-4e31-a23e-3c02dfe57722}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>win32</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\AppDelegate.cpp">
+      <Filter>Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\GameMain.cpp">
+      <Filter>Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\VisibleRect.cpp">
+      <Filter>Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\components\MenuWithLabel.cpp">
+      <Filter>Classes\components</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\base\BaseScene.cpp">
+      <Filter>Classes\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\scenes\PlayScene.cpp">
+      <Filter>Classes\scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\components\DiamondSprite.cpp">
+      <Filter>Classes\components</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="main.h">
+      <Filter>win32</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\AppDelegate.h">
+      <Filter>Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\GameMain.h">
+      <Filter>Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\VisibleRect.h">
+      <Filter>Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="common.h">
+      <Filter>Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\components\MenuWithLabel.h">
+      <Filter>Classes\components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\base\BaseScene.h">
+      <Filter>Classes\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\scenes\PlayScene.h">
+      <Filter>Classes\scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\components\DiamondSprite.h">
+      <Filter>Classes\components</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
