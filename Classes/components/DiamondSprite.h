@@ -3,9 +3,14 @@
 
 #include "common.h"
 
-class DiamondSprite:public CCSprite,public CCStandardTouchDelegate
+class DiamondSprite:public CCSprite,public CCTouchDelegate
 {
-
-}
+public:
+	int row;
+	int col;
+	int type;
+public:
+	static DiamondSprite *createDiamond(const char *frameName);
+};
 
 #endif //!_DIAMONDSPRITE_H_
