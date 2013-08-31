@@ -34,10 +34,8 @@ void PlayScene::draw()
 void PlayScene::checkInitDiamonds()
 {
 	CCObject *oneRow = NULL;
-	int r = 0;
 	CCARRAY_FOREACH(diamonds,oneRow)
 	{
-		CCLog("current row %d",++r);
 		CCArray *ds = (CCArray*)oneRow;
 		CCObject *diamond;
 		//相同钻石挨着的个数
@@ -46,15 +44,17 @@ void PlayScene::checkInitDiamonds()
 		CCARRAY_FOREACH(ds,diamond)
 		{
 			DiamondSprite *diamondSpr = (DiamondSprite*)diamond;
+			//CCLog("row %d",diamondSpr->row);
 			if(prevType==0){
 				prevType = diamondSpr->type;
 			}else if(prevType==diamondSpr->type){
 				num++;
 			}else{
 				num = 1;
+				prevType = diamondSpr->type;
 			}
 			if(num==3){
-				CCLog("find 3diamond");
+				CCLog("find 3diamond  at row %d",diamondSpr->row);
 				srand(time(NULL));
 				int newType = prevType;
 				while(newType==prevType){
