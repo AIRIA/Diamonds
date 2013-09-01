@@ -43,7 +43,7 @@
       <Filter>Classes\components</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\base\ShareVars.cpp">
-      <Filter>Classes</Filter>
+      <Filter>Classes\base</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -75,7 +75,7 @@
       <Filter>Classes</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\base\ShareVars.h">
-      <Filter>Classes</Filter>
+      <Filter>Classes\base</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
