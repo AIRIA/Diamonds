@@ -102,7 +102,12 @@ void PlayScene::checkThree( DiamondSprite *source[D_ROW][D_COL] )
 			if(num==3){
 				CCLog("find 3 diamonds at row %d",(*ds)->row);
 				while(prevType==currentType){
-					currentType = rand()%(D_TYPE-1)+1;
+					while(checkIsVailible(*ds)){
+						currentType = rand()%(D_TYPE-1)+1;
+						(*ds)->type = currentType;
+					}
+					CCString *frameName = CCString::createWithFormat("hdpi_jewel%d.png",currentType);
+					(*ds)->setDisplayFrame(frameCache->spriteFrameByName(frameName->getCString()));
 				}
 			}
 			ds++;

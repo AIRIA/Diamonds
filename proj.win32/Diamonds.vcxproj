@@ -129,6 +129,7 @@ xcopy /Y /Q "$(ProjectDir)..\..\..\external\libwebsockets\win32\lib\*.*" "$(OutD
   <ItemGroup>
     <ClCompile Include="..\Classes\AppDelegate.cpp" />
     <ClCompile Include="..\Classes\base\BaseScene.cpp" />
+    <ClCompile Include="..\Classes\base\ShareVars.cpp" />
     <ClCompile Include="..\Classes\components\DiamondSprite.cpp" />
     <ClCompile Include="..\Classes\components\MenuWithLabel.cpp" />
     <ClCompile Include="..\Classes\GameMain.cpp" />
@@ -139,13 +140,14 @@ xcopy /Y /Q "$(ProjectDir)..\..\..\external\libwebsockets\win32\lib\*.*" "$(OutD
   <ItemGroup>
     <ClInclude Include="..\Classes\AppDelegate.h" />
     <ClInclude Include="..\Classes\base\BaseScene.h" />
+    <ClInclude Include="..\Classes\base\ShareVars.h" />
+    <ClInclude Include="..\Classes\common.h" />
     <ClInclude Include="..\Classes\components\DiamondSprite.h" />
     <ClInclude Include="..\Classes\components\MenuWithLabel.h" />
     <ClInclude Include="..\Classes\GameMain.h" />
     <ClInclude Include="..\Classes\scenes\PlayScene.h" />
     <ClInclude Include="..\Classes\VisibleRect.h" />
     <ClInclude Include="main.h" />
-    <ClInclude Include="common.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\cocos2dx\proj.win32\cocos2d.vcxproj">
