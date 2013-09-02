@@ -5,6 +5,8 @@
 
 class DiamondSprite:public CCSprite,public CCTouchDelegate
 {
+private:
+	bool isMoving;
 public:
     int row;
     int col;
@@ -12,6 +14,7 @@ public:
     bool canBeRemove;
 public:
     static DiamondSprite *createDiamond(const char *frameName);
+	void updatePosition();
     /* 更改已经选中的两个钻石的位置 */
     static void changePosition();
     void changePostionHandler();
@@ -21,7 +24,7 @@ public:
     virtual bool ccTouchBegan(CCTouch *pTouch, CCEvent *pEvent);
     virtual void ccTouchMoved(CCTouch *pTouch, CCEvent *pEvent);
     virtual void ccTouchEnded(CCTouch *pTouch, CCEvent *pEvent);
-    DiamondSprite():canBeRemove(false) {};
+    DiamondSprite():isMoving(false),canBeRemove(false) {};
 };
 
 #endif //!_DIAMONDSPRITE_H_

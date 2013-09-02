@@ -90,13 +90,20 @@ void DiamondSprite::update( float delta )
 {
 	if(row<D_ROW){
 		DiamondSprite *blowDiamond = PlayScene::diamonds[row+1][col];
-		if(blowDiamond==NULL){
+		if(isMoving==false&&blowDiamond==NULL){
+			isMoving = true;
 			CCLog("row %d,col %d",row+1,col);
 			CCActionInterval *moveDown = CCMoveTo::create(0.3f,ccp(getPositionX(),getPositionY()-DIAMOND_HEIGHT));
-			runAction(moveDown);
-			PlayScene::diamonds[row][col] = NULL;
-			PlayScene::diamonds[row+1][col] = this;
-			this->row += 1;
+			CCCallFunc *resetCallFunc = CCCallFunc::create(this,callfunc_selector(DiamondSprite::updatePosition));
+			runAction(CCSequence::create(moveDown,resetCallFunc,NULL));
+			
 		}
 	}
+}
+
+void DiamondSprite::updatePosition()
+{
+	this->row = this->row+1;
+	isMoving = false;
+	//PlayScene::diamonds[row][col] = this;
 }
