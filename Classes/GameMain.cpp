@@ -49,6 +49,6 @@ void GameMain::initUI()
 
 void GameMain::newGameHandler(CCObject *pSender)
 {
-	CCDirector::sharedDirector()->replaceScene(CCTransitionShrinkGrow::create(1,PlayScene::create()));
+	CCDirector::sharedDirector()->replaceScene(PlayScene::create());
 }
 

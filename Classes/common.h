@@ -4,7 +4,7 @@
 #include "cocos2d.h"
 #include "VisibleRect.h"
 #include "cocos-ext.h"
-
+using namespace std;
 USING_NS_CC;
 USING_NS_CC_EXT;
 

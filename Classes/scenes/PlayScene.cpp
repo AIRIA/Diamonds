@@ -29,10 +29,10 @@ void PlayScene::draw()
 
 void PlayScene::checkInitDiamonds()
 {
-	checkThree(diamonds);
-	setRotateDiamonds();
-	CCLog("---------");
-	checkThree(rotateDiamonds);
+    checkThree(diamonds);
+    setRotateDiamonds();
+    CCLog("---------");
+    checkThree(rotateDiamonds);
 }
 
 void PlayScene::createDiamonds()
@@ -70,139 +70,282 @@ void PlayScene::setRotateDiamonds()
 
 void PlayScene::checkThree( DiamondSprite *source[D_ROW][D_COL] )
 {
-	srand(time(NULL));
-	DiamondSprite **ds;
-	ds = source[0];
-	for(int i=0; i<D_ROW; i++)
-	{
-		int prevType = 0;
-		int num = 1;
-		for(int j=0; j<D_COL; j++)
-		{
-			if(checkIsVailible(*ds))
-			{
-				CCLog("is availible at row %d,col%d",(*ds)->row,(*ds)->col);
-			}
-			int currentType = (*ds)->type;
-			//CCLog("diamond type %d",currentType);
-			if(prevType==0)
-			{
-				prevType = currentType;
-			}
-			else if (prevType==currentType)
-			{
-				num++;
-			}
-			else
-			{
-				num = 1;
-				prevType = currentType;
-			}
-			if(num==3){
-				CCLog("find 3 diamonds at row %d",(*ds)->row);
-				while(prevType==currentType){
-					while(checkIsVailible(*ds)){
-						currentType = rand()%(D_TYPE-1)+1;
-						(*ds)->type = currentType;
-					}
-					CCString *frameName = CCString::createWithFormat("hdpi_jewel%d.png",currentType);
-					(*ds)->setDisplayFrame(frameCache->spriteFrameByName(frameName->getCString()));
-				}
-			}
-			ds++;
-		}
-	}
+    srand(time(NULL));
+    DiamondSprite **ds;
+    ds = source[0];
+    for(int i=0; i<D_ROW; i++)
+    {
+        int prevType = 0;
+        int num = 1;
+        for(int j=0; j<D_COL; j++)
+        {
+            if(checkIsVailible(*ds))
+            {
+                CCLog("is availible at row %d,col%d",(*ds)->row,(*ds)->col);
+            }
+            int currentType = (*ds)->type;
+            //CCLog("diamond type %d",currentType);
+            if(prevType==0)
+            {
+                prevType = currentType;
+            }
+            else if (prevType==currentType)
+            {
+                num++;
+            }
+            else
+            {
+                num = 1;
+                prevType = currentType;
+            }
+            if(num==3)
+            {
+                CCLog("find 3 diamonds at row %d",(*ds)->row);
+                while(prevType==currentType)
+                {
+                    while(checkIsVailible(*ds))
+                    {
+                        currentType = rand()%(D_TYPE-1)+1;
+                        (*ds)->type = currentType;
+                    }
+                    CCString *frameName = CCString::createWithFormat("hdpi_jewel%d.png",currentType);
+                    (*ds)->setDisplayFrame(frameCache->spriteFrameByName(frameName->getCString()));
+                }
+            }
+            ds++;
+        }
+    }
 }
 
 bool PlayScene::checkIsVailible( DiamondSprite *ds )
 {
-	int row = ds->row,col=ds->col,type = ds->type;
-	int t1,t2;
-	if(row>0&&row<(D_ROW-1)){//y direction
-		t1 = diamonds[row-1][col]->type;
-		t2 = diamonds[row+1][col]->type;
-		if(t1==t2&&t1==type){
-			return true;
-		}
-	}
-	if(col>0&&col<(D_COL-1)){//x direction
-		t1 = diamonds[row][col-1]->type;
-		t2 = diamonds[row][col+1]->type;
-		if(t1==t2&&t1==type){
-			return true;
-		}
-	}
-	if(row>1){//up
-		t1 = diamonds[row-1][col]->type;
-		t2 = diamonds[row-2][col]->type;
-		if(t1==t2&&t1==type){
-			return true;
-		}
-	}
-	if(row<(D_ROW-2)){//down
-		t1 = diamonds[row+1][col]->type;
-		t2 = diamonds[row+2][col]->type;
-		if(t1==t2&&t1==type){
-			return true;
-		}
-	}
-	
-	if(col>1){//left
-		t1 = diamonds[row][col-1]->type;
-		t2 = diamonds[row][col-2]->type;
-		if(t1==t2&&t1==type){
-			return true;
-		}
-	}
+    int row = ds->row,col=ds->col,type = ds->type;
+    int t1,t2;
+    if(row>0&&row<(D_ROW-1)) //y direction
+    {
+        t1 = diamonds[row-1][col]->type;
+        t2 = diamonds[row+1][col]->type;
+        if(t1==t2&&t1==type)
+        {
+            return true;
+        }
+    }
+    if(col>0&&col<(D_COL-1)) //x direction
+    {
+        t1 = diamonds[row][col-1]->type;
+        t2 = diamonds[row][col+1]->type;
+        if(t1==t2&&t1==type)
+        {
+            return true;
+        }
+    }
+    if(row>1) //up
+    {
+        t1 = diamonds[row-1][col]->type;
+        t2 = diamonds[row-2][col]->type;
+        if(t1==t2&&t1==type)
+        {
+            return true;
+        }
+    }
+    if(row<(D_ROW-2)) //down
+    {
+        t1 = diamonds[row+1][col]->type;
+        t2 = diamonds[row+2][col]->type;
+        if(t1==t2&&t1==type)
+        {
+            return true;
+        }
+    }
 
-	if(col<(D_COL-2)){//right
-		t1 = diamonds[row][col+1]->type;
-		t2 = diamonds[row][col+2]->type;
-		if(t1==t2&&t1==type){
-			return true;
-		}
-	}
-	return false;
+    if(col>1) //left
+    {
+        t1 = diamonds[row][col-1]->type;
+        t2 = diamonds[row][col-2]->type;
+        if(t1==t2&&t1==type)
+        {
+            return true;
+        }
+    }
+
+    if(col<(D_COL-2)) //right
+    {
+        t1 = diamonds[row][col+1]->type;
+        t2 = diamonds[row][col+2]->type;
+        if(t1==t2&&t1==type)
+        {
+            return true;
+        }
+    }
+    return false;
 }
 
 void PlayScene::checkCanbeDes(CCObject *obj)
 {
-	vector<DiamondSprite*> temp;
-	touchEnable = false;
-	int fstOrder = fstDiamond->getZOrder();
-	int secOrder = secDiamond->getZOrder();
-	CCPoint p1 = fstDiamond->getPosition();
-	CCPoint p2 = secDiamond->getPosition();
-	fstDiamond->getParent()->reorderChild(fstDiamond,secOrder);
-	secDiamond->getParent()->reorderChild(secDiamond,fstOrder);
-	CCActionInterval *m1 = CCMoveTo::create(0.3f,p1);
-	CCActionInterval *m2 = CCMoveTo::create(0.3f,p2);
-	CCCallFunc *moveCompFunc = CCCallFunc::create(this,callfunc_selector(PlayScene::changePosHandler));
-	CCSequence *moveSeq = CCSequence::create(m1,moveCompFunc,NULL);
-	fstDiamond->runAction(m2);
-	secDiamond->runAction(moveSeq);
-	secDiamond = fstDiamond = NULL;
-	//记录下来两个钻石的原始 所在的行列数据
-	//int frow = fstDiamond->row,fcol=fstDiamond->col,scol=secDiamond->col,srow=secDiamond->row;
-	//diamonds[frow][fcol] = secDiamond;
-	CCLog("hello");
+    vector<DiamondSprite*> temp;
+    //记录下来两个钻石的原始 所在的行列数据
+    changePosInVector();
+    bool res = false;
+	vector<DiamondSprite*> r1 = getDiamonds(fstDiamond);
+	vector<DiamondSprite*> r2 = getDiamonds(secDiamond);
+    if(r1.size()!=0||r2.size()!=0)
+    {
+		touchEnable = true;
+    }
+    else
+    {
+		changePosInVector();
+        touchEnable = false;
+        int fstOrder = fstDiamond->getZOrder();
+        int secOrder = secDiamond->getZOrder();
+        CCPoint p1 = fstDiamond->getPosition();
+        CCPoint p2 = secDiamond->getPosition();
+        fstDiamond->getParent()->reorderChild(fstDiamond,secOrder);
+        secDiamond->getParent()->reorderChild(secDiamond,fstOrder);
+        CCActionInterval *m1 = CCMoveTo::create(0.3f,p1);
+        CCActionInterval *m2 = CCMoveTo::create(0.3f,p2);
+        CCCallFunc *moveCompFunc = CCCallFunc::create(this,callfunc_selector(PlayScene::changePosHandler));
+        CCSequence *moveSeq = CCSequence::create(m1,moveCompFunc,NULL);
+        fstDiamond->runAction(m2);
+        secDiamond->runAction(moveSeq);
+        secDiamond = fstDiamond = NULL;
+    }
+    CCLog("hello");
 }
 
 void PlayScene::onEnter()
 {
-	BaseScene::onEnter();
-	CCNotificationCenter::sharedNotificationCenter()->addObserver(this,callfuncO_selector(PlayScene::checkCanbeDes),CHECK_CANBE_REMOVE,NULL);
+    BaseScene::onEnter();
+    CCNotificationCenter::sharedNotificationCenter()->addObserver(this,callfuncO_selector(PlayScene::checkCanbeDes),CHECK_CANBE_REMOVE,NULL);
 }
 
 void PlayScene::onExit()
 {
-	CCNotificationCenter::sharedNotificationCenter()->removeObserver(this,CHECK_CANBE_REMOVE);
-	BaseScene::onExit();
+    CCNotificationCenter::sharedNotificationCenter()->removeObserver(this,CHECK_CANBE_REMOVE);
+    BaseScene::onExit();
 }
 
 void PlayScene::changePosHandler()
 {
-	touchEnable = true;
+    touchEnable = true;
+}
+
+vector<DiamondSprite*> PlayScene::getDiamonds( DiamondSprite *targetDS )
+{
+    vector<DiamondSprite*> diamondVec;
+    //两个方向 row col
+    int row = targetDS->row;
+    DiamondSprite *ds;
+    int prevType=0,currentType=0,num=1;
+    vector<DiamondSprite*> tempRow;
+    for(int i=0; i<D_COL; i++)
+    {
+        ds = diamonds[row][i];
+        currentType = ds->type;
+        if(prevType==0)
+        {
+            prevType = currentType;
+            tempRow.push_back(ds);
+        }
+        else if(prevType==currentType)
+        {
+            num++;
+            tempRow.push_back(ds);
+        }
+        else if(num>2)
+        {
+			vector<DiamondSprite*>::iterator it = tempRow.begin();
+			while(it!=tempRow.end())
+			{
+				diamondVec.push_back(*it);
+				it++;
+			}
+			tempRow.clear();
+			prevType = currentType;
+			num=1;
+        }
+        else
+        {
+			num=1;
+			tempRow.clear();
+			prevType = currentType;
+        }
+		if(i==(D_COL-1)&&num>2)
+		{
+			vector<DiamondSprite*>::iterator it = tempRow.begin();
+			while(it!=tempRow.end())
+			{
+				diamondVec.push_back(*it);
+				it++;
+			}
+			tempRow.clear();
+			prevType = currentType;
+			num=1;
+		}
+    }
+	vector<DiamondSprite*> tempCol;
+	int col = targetDS->col;
+	prevType=0;
+	num=1;
+	for(int i=0;i<D_COL;i++)
+	{
+		ds = diamonds[i][col];
+		currentType = ds->type;
+		if(prevType==0)
+		{
+			prevType = currentType;
+			tempCol.push_back(ds);
+		}
+		else if(prevType==currentType)
+		{
+			num++;
+			tempCol.push_back(ds);
+		}
+		else if(num>2)
+		{
+			vector<DiamondSprite*>::iterator it = tempCol.begin();
+			while(it!=tempCol.end())
+			{
+				diamondVec.push_back(*it);
+				it++;
+			}
+			tempCol.clear();
+			prevType = currentType;
+			num=1;
+		}
+		else
+		{
+			num=1;
+			tempCol.clear();
+			prevType = currentType;
+		}
+		if(i==(D_ROW-1)&&num>2)
+		{
+			vector<DiamondSprite*>::iterator it = tempCol.begin();
+			while(it!=tempCol.end())
+			{
+				diamondVec.push_back(*it);
+				it++;
+			}
+			tempCol.clear();
+			prevType = currentType;
+			num=1;
+		}
+	}
+
+    return diamondVec;
+}
+
+void PlayScene::changePosInVector()
+{
+	int frow = fstDiamond->row,fcol=fstDiamond->col,scol=secDiamond->col,srow=secDiamond->row;
+	secDiamond->row = frow;
+	secDiamond->col = fcol;
+	fstDiamond->row = srow;
+	fstDiamond->col = scol;
+
+	diamonds[frow][fcol] = secDiamond;
+	diamonds[srow][scol] = fstDiamond;
 }
 
 
