@@ -33,6 +33,8 @@ public:
 	void checkThree(DiamondSprite *source[D_ROW][D_COL]);
 	/* 更改两个钻石在vector中的位置 */
 	void changePosInVector();
+	/* 移除钻石 */
+	void removeDiamonds(vector<DiamondSprite*> dsVec);
 	
 public:
     virtual bool init();

@@ -188,6 +188,8 @@ void PlayScene::checkCanbeDes(CCObject *obj)
     bool res = false;
 	vector<DiamondSprite*> r1 = getDiamonds(fstDiamond);
 	vector<DiamondSprite*> r2 = getDiamonds(secDiamond);
+	removeDiamonds(r1);
+	removeDiamonds(r2);
     if(r1.size()!=0||r2.size()!=0)
     {
 		touchEnable = true;
@@ -210,7 +212,6 @@ void PlayScene::checkCanbeDes(CCObject *obj)
         secDiamond->runAction(moveSeq);
         secDiamond = fstDiamond = NULL;
     }
-    CCLog("hello");
 }
 
 void PlayScene::onEnter()
@@ -245,12 +246,10 @@ vector<DiamondSprite*> PlayScene::getDiamonds( DiamondSprite *targetDS )
         if(prevType==0)
         {
             prevType = currentType;
-            tempRow.push_back(ds);
         }
         else if(prevType==currentType)
         {
             num++;
-            tempRow.push_back(ds);
         }
         else if(num>2)
         {
@@ -272,6 +271,7 @@ vector<DiamondSprite*> PlayScene::getDiamonds( DiamondSprite *targetDS )
         }
 		if(i==(D_COL-1)&&num>2)
 		{
+			tempRow.push_back(ds);
 			vector<DiamondSprite*>::iterator it = tempRow.begin();
 			while(it!=tempRow.end())
 			{
@@ -282,6 +282,7 @@ vector<DiamondSprite*> PlayScene::getDiamonds( DiamondSprite *targetDS )
 			prevType = currentType;
 			num=1;
 		}
+		tempRow.push_back(ds);
     }
 	vector<DiamondSprite*> tempCol;
 	int col = targetDS->col;
@@ -294,12 +295,10 @@ vector<DiamondSprite*> PlayScene::getDiamonds( DiamondSprite *targetDS )
 		if(prevType==0)
 		{
 			prevType = currentType;
-			tempCol.push_back(ds);
 		}
 		else if(prevType==currentType)
 		{
 			num++;
-			tempCol.push_back(ds);
 		}
 		else if(num>2)
 		{
@@ -321,6 +320,7 @@ vector<DiamondSprite*> PlayScene::getDiamonds( DiamondSprite *targetDS )
 		}
 		if(i==(D_ROW-1)&&num>2)
 		{
+			tempCol.push_back(ds);
 			vector<DiamondSprite*>::iterator it = tempCol.begin();
 			while(it!=tempCol.end())
 			{
@@ -331,6 +331,7 @@ vector<DiamondSprite*> PlayScene::getDiamonds( DiamondSprite *targetDS )
 			prevType = currentType;
 			num=1;
 		}
+		tempCol.push_back(ds);
 	}
 
     return diamondVec;
@@ -346,6 +347,18 @@ void PlayScene::changePosInVector()
 
 	diamonds[frow][fcol] = secDiamond;
 	diamonds[srow][scol] = fstDiamond;
+}
+
+void PlayScene::removeDiamonds( vector<DiamondSprite*> dsVec )
+{
+	vector<DiamondSprite*>::iterator it = dsVec.begin();
+	while(it!=dsVec.end())
+	{
+		CCActionInterval *act = CCScaleTo::create(0.5,0);
+		//(*it)->runAction(act);
+		(*it)->setOpacity(128);
+		it++;
+	}
 }
 
 
