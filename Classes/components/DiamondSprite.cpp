@@ -13,6 +13,7 @@ DiamondSprite *DiamondSprite::createDiamond(const char *frameName)
 void DiamondSprite::onEnter()
 {
 	CCSprite::onEnter();
+	scheduleUpdate();
 	CCDirector::sharedDirector()->getTouchDispatcher()->addTargetedDelegate(this,0,false);
 }
 
@@ -82,4 +83,9 @@ bool DiamondSprite::isContainPoint( CCTouch *touch )
 	CCSize spriteSize = getContentSize();
 	CCRect spriteRect = CCRectMake(-arPoint.x,-arPoint.y,spriteSize.width,spriteSize.height);
 	return spriteRect.containsPoint(point);
+}
+
+void DiamondSprite::update( float delta )
+{
+	
 }

@@ -14,8 +14,8 @@ class PlayScene:public BaseScene
 {
 public:
 	vector<DiamondSprite*> waitRemove;
-	DiamondSprite *diamonds[D_ROW][D_COL];
-	DiamondSprite *rotateDiamonds[D_ROW][D_COL];
+	static DiamondSprite *diamonds[D_ROW][D_COL];
+	static DiamondSprite *rotateDiamonds[D_ROW][D_COL];
 public:
 	/* 根据一个钻石获取他周围可以消除的钻石 */
 	vector<DiamondSprite*> getDiamonds(DiamondSprite *ds);
@@ -30,12 +30,14 @@ public:
 	void setRotateDiamonds();
 	/* 检测宝石交换位置后 是不是可以被删除 */
 	void checkCanbeDes(CCObject *obj);
+	/* 检测是不是有三个连着的 */
 	void checkThree(DiamondSprite *source[D_ROW][D_COL]);
 	/* 更改两个钻石在vector中的位置 */
 	void changePosInVector();
 	/* 移除钻石 */
 	void removeDiamonds(vector<DiamondSprite*> dsVec);
-	
+	/* 填补空位 */
+	void fillNewDiamonds();
 public:
     virtual bool init();
 	virtual void draw();

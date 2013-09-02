@@ -15,6 +15,7 @@ public:
     /* 更改已经选中的两个钻石的位置 */
     static void changePosition();
     void changePostionHandler();
+	virtual void update(float delta);
     bool isContainPoint(CCTouch *pTouch);
     virtual void onEnter();
     virtual bool ccTouchBegan(CCTouch *pTouch, CCEvent *pEvent);

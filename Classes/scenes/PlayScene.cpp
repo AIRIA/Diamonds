@@ -3,6 +3,9 @@
 
 using namespace std;
 
+DiamondSprite *PlayScene::diamonds[D_ROW][D_COL] = {};
+DiamondSprite *PlayScene::rotateDiamonds[D_ROW][D_COL] = {};
+
 bool PlayScene::init()
 {
     bool res = false;
@@ -188,8 +191,10 @@ void PlayScene::checkCanbeDes(CCObject *obj)
     bool res = false;
 	vector<DiamondSprite*> r1 = getDiamonds(fstDiamond);
 	vector<DiamondSprite*> r2 = getDiamonds(secDiamond);
-	removeDiamonds(r1);
-	removeDiamonds(r2);
+	waitRemove.insert(waitRemove.begin(),r1.begin(),r1.end());
+	waitRemove.insert(waitRemove.begin(),r2.begin(),r2.end());
+	removeDiamonds(waitRemove);
+	
     if(r1.size()!=0||r2.size()!=0)
     {
 		touchEnable = true;
@@ -218,7 +223,7 @@ void PlayScene::onEnter()
 {
     BaseScene::onEnter();
     CCNotificationCenter::sharedNotificationCenter()->addObserver(this,callfuncO_selector(PlayScene::checkCanbeDes),CHECK_CANBE_REMOVE,NULL);
-}
+} 
 
 void PlayScene::onExit()
 {
@@ -253,12 +258,7 @@ vector<DiamondSprite*> PlayScene::getDiamonds( DiamondSprite *targetDS )
         }
         else if(num>2)
         {
-			vector<DiamondSprite*>::iterator it = tempRow.begin();
-			while(it!=tempRow.end())
-			{
-				diamondVec.push_back(*it);
-				it++;
-			}
+			diamondVec.insert(diamondVec.begin(),tempRow.begin(),tempRow.end());
 			tempRow.clear();
 			prevType = currentType;
 			num=1;
@@ -272,12 +272,7 @@ vector<DiamondSprite*> PlayScene::getDiamonds( DiamondSprite *targetDS )
 		if(i==(D_COL-1)&&num>2)
 		{
 			tempRow.push_back(ds);
-			vector<DiamondSprite*>::iterator it = tempRow.begin();
-			while(it!=tempRow.end())
-			{
-				diamondVec.push_back(*it);
-				it++;
-			}
+			diamondVec.insert(diamondVec.begin(),tempRow.begin(),tempRow.end());
 			tempRow.clear();
 			prevType = currentType;
 			num=1;
@@ -302,12 +297,7 @@ vector<DiamondSprite*> PlayScene::getDiamonds( DiamondSprite *targetDS )
 		}
 		else if(num>2)
 		{
-			vector<DiamondSprite*>::iterator it = tempCol.begin();
-			while(it!=tempCol.end())
-			{
-				diamondVec.push_back(*it);
-				it++;
-			}
+			diamondVec.insert(diamondVec.begin(),tempCol.begin(),tempCol.end());
 			tempCol.clear();
 			prevType = currentType;
 			num=1;
@@ -321,12 +311,7 @@ vector<DiamondSprite*> PlayScene::getDiamonds( DiamondSprite *targetDS )
 		if(i==(D_ROW-1)&&num>2)
 		{
 			tempCol.push_back(ds);
-			vector<DiamondSprite*>::iterator it = tempCol.begin();
-			while(it!=tempCol.end())
-			{
-				diamondVec.push_back(*it);
-				it++;
-			}
+			diamondVec.insert(diamondVec.begin(),tempCol.begin(),tempCol.end());
 			tempCol.clear();
 			prevType = currentType;
 			num=1;
@@ -355,10 +340,18 @@ void PlayScene::removeDiamonds( vector<DiamondSprite*> dsVec )
 	while(it!=dsVec.end())
 	{
 		CCActionInterval *act = CCScaleTo::create(0.5,0);
-		//(*it)->runAction(act);
-		(*it)->setOpacity(128);
+		(*it)->runAction(act);
+		//(*it)->setOpacity(128);
 		it++;
 	}
+	CCCallFunc *fillNew = CCCallFunc::create(this,callfunc_selector(PlayScene::fillNewDiamonds));
+	CCSequence *seq = CCSequence::create(CCDelayTime::create(0.5f),fillNew,NULL);
+	runAction(seq);
+}
+
+void PlayScene::fillNewDiamonds()
+{
+
 }
 
 
