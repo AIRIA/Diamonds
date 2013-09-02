@@ -21,6 +21,8 @@ void DiamondSprite::changePosition()
 	if(fstDiamond&&secDiamond)
 	{
 		touchEnable = false;
+		fstDiamond->setZOrder(1);
+		secDiamond->setZOrder(2);
 		CCPoint p1 = fstDiamond->getPosition();
 		CCPoint p2 = secDiamond->getPosition();
 		CCActionInterval *m1 = CCMoveTo::create(0.3f,p1);
@@ -34,8 +36,7 @@ void DiamondSprite::changePosition()
 
 void DiamondSprite::changePostionHandler()
 {
-	fstDiamond = NULL;
-	secDiamond = NULL;
+	CCNotificationCenter::sharedNotificationCenter()->postNotification(CHECK_CANBE_REMOVE);
 }
 
 bool DiamondSprite::ccTouchBegan( CCTouch *pTouch, CCEvent *pEvent )
@@ -71,7 +72,7 @@ void DiamondSprite::ccTouchMoved( CCTouch *pTouch, CCEvent *pEvent )
 
 void DiamondSprite::ccTouchEnded(CCTouch *pTouch, CCEvent *pEvent)
 {
-	touchEnable = true;
+	
 }
 
 bool DiamondSprite::isContainPoint( CCTouch *touch )

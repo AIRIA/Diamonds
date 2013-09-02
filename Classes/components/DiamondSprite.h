@@ -3,7 +3,6 @@
 
 #include "common.h"
 
-
 class DiamondSprite:public CCSprite,public CCTouchDelegate
 {
 public:
@@ -13,9 +12,9 @@ public:
     bool canBeRemove;
 public:
     static DiamondSprite *createDiamond(const char *frameName);
-	/* 更改已经选中的两个钻石的位置 */
-	static void changePosition();
-	void changePostionHandler();
+    /* 更改已经选中的两个钻石的位置 */
+    static void changePosition();
+    void changePostionHandler();
     bool isContainPoint(CCTouch *pTouch);
     virtual void onEnter();
     virtual bool ccTouchBegan(CCTouch *pTouch, CCEvent *pEvent);

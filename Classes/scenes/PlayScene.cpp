@@ -1,8 +1,7 @@
 #include "PlayScene.h"
+#include "base/ShareVars.h"
 
 using namespace std;
-
-
 
 bool PlayScene::init()
 {
@@ -166,5 +165,44 @@ bool PlayScene::checkIsVailible( DiamondSprite *ds )
 	return false;
 }
 
+void PlayScene::checkCanbeDes(CCObject *obj)
+{
+	vector<DiamondSprite*> temp;
+	touchEnable = false;
+	int fstOrder = fstDiamond->getZOrder();
+	int secOrder = secDiamond->getZOrder();
+	CCPoint p1 = fstDiamond->getPosition();
+	CCPoint p2 = secDiamond->getPosition();
+	fstDiamond->getParent()->reorderChild(fstDiamond,secOrder);
+	secDiamond->getParent()->reorderChild(secDiamond,fstOrder);
+	CCActionInterval *m1 = CCMoveTo::create(0.3f,p1);
+	CCActionInterval *m2 = CCMoveTo::create(0.3f,p2);
+	CCCallFunc *moveCompFunc = CCCallFunc::create(this,callfunc_selector(PlayScene::changePosHandler));
+	CCSequence *moveSeq = CCSequence::create(m1,moveCompFunc,NULL);
+	fstDiamond->runAction(m2);
+	secDiamond->runAction(moveSeq);
+	secDiamond = fstDiamond = NULL;
+	//记录下来两个钻石的原始 所在的行列数据
+	//int frow = fstDiamond->row,fcol=fstDiamond->col,scol=secDiamond->col,srow=secDiamond->row;
+	//diamonds[frow][fcol] = secDiamond;
+	CCLog("hello");
+}
+
+void PlayScene::onEnter()
+{
+	BaseScene::onEnter();
+	CCNotificationCenter::sharedNotificationCenter()->addObserver(this,callfuncO_selector(PlayScene::checkCanbeDes),CHECK_CANBE_REMOVE,NULL);
+}
+
+void PlayScene::onExit()
+{
+	CCNotificationCenter::sharedNotificationCenter()->removeObserver(this,CHECK_CANBE_REMOVE);
+	BaseScene::onExit();
+}
+
+void PlayScene::changePosHandler()
+{
+	touchEnable = true;
+}
 
 

@@ -5,5 +5,7 @@ extern DiamondSprite *fstDiamond;
 extern DiamondSprite *secDiamond;
 extern bool touchEnable;
 
+static const char *CHECK_CANBE_REMOVE = "check_canbe_remove";
+
 #endif
 
