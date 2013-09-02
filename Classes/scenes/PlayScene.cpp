@@ -247,6 +247,8 @@ vector<DiamondSprite*> PlayScene::getDiamonds( DiamondSprite *targetDS )
     for(int i=0; i<D_COL; i++)
     {
         ds = diamonds[row][i];
+		if(ds==NULL)
+			continue;
         currentType = ds->type;
         if(prevType==0)
         {
@@ -286,6 +288,8 @@ vector<DiamondSprite*> PlayScene::getDiamonds( DiamondSprite *targetDS )
 	for(int i=0;i<D_COL;i++)
 	{
 		ds = diamonds[i][col];
+		if(ds==NULL)
+			continue;
 		currentType = ds->type;
 		if(prevType==0)
 		{
@@ -351,7 +355,14 @@ void PlayScene::removeDiamonds( vector<DiamondSprite*> dsVec )
 
 void PlayScene::fillNewDiamonds()
 {
-
+	vector<DiamondSprite*>::iterator it = waitRemove.begin();
+	DiamondSprite *ds;
+	while(it!=waitRemove.end())
+	{
+		ds = *it;
+		diamonds[ds->row][ds->col] = NULL;
+		it++;
+	}
 }
 
 

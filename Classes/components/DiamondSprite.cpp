@@ -1,5 +1,6 @@
 #include "DiamondSprite.h"
 #include "base/ShareVars.h"
+#include "scenes/PlayScene.h"
 
 DiamondSprite *DiamondSprite::createDiamond(const char *frameName)
 {
@@ -87,5 +88,15 @@ bool DiamondSprite::isContainPoint( CCTouch *touch )
 
 void DiamondSprite::update( float delta )
 {
-	
+	if(row<D_ROW){
+		DiamondSprite *blowDiamond = PlayScene::diamonds[row+1][col];
+		if(blowDiamond==NULL){
+			CCLog("row %d,col %d",row+1,col);
+			CCActionInterval *moveDown = CCMoveTo::create(0.3f,ccp(getPositionX(),getPositionY()-DIAMOND_HEIGHT));
+			runAction(moveDown);
+			PlayScene::diamonds[row][col] = NULL;
+			PlayScene::diamonds[row+1][col] = this;
+			this->row += 1;
+		}
+	}
 }

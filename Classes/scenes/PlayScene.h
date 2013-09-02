@@ -4,11 +4,6 @@
 #include "base/BaseScene.h"
 #include "components/DiamondSprite.h"
 
-#define D_ROW 8
-#define D_COL 8
-#define DIAMOND_WIDTH 60
-#define DIAMOND_HEIGHT 60
-#define D_TYPE 8
 
 class PlayScene:public BaseScene
 {
