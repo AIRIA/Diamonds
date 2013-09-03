@@ -16,6 +16,7 @@ bool GameMain::init()
     do
     {
         CC_BREAK_IF(!CCLayer::init());
+		setKeypadEnabled(true);
         initUI();
         res = true;
     }
@@ -50,5 +51,13 @@ void GameMain::initUI()
 void GameMain::newGameHandler(CCObject *pSender)
 {
 	CCDirector::sharedDirector()->replaceScene(PlayScene::create());
+}
+
+void GameMain::keyBackClicked()
+{
+	CCDirector::sharedDirector()->end();
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+	exit(0);
+#endif
 }
 

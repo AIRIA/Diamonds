@@ -10,6 +10,10 @@ private:
     void initUI();
 	/* 开始新游戏 */
 	void newGameHandler(CCObject *pSender);
+	/************************************************************************/
+	/* 按返回键退出游戏                                                      */
+	/************************************************************************/
+	virtual void keyBackClicked();
 public:
     static CCScene *scene();
     virtual bool init();

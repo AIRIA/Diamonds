@@ -330,7 +330,8 @@ obj/local/armeabi/objs/cocos2dcpp_shared/__/__/Classes/scenes/PlayScene.o: \
  /cygdrive/e/cocos/cocos2d-x-2.1.4/projects/Diamonds/proj.android/../../../extensions/Components/CCComController.h \
  /cygdrive/e/cocos/cocos2d-x-2.1.4/projects/Diamonds/proj.android/../../../extensions/Components/CCInputDelegate.h \
  jni/../../Classes/components/DiamondSprite.h \
- jni/../../Classes/base/ShareVars.h
+ jni/../../Classes/base/ShareVars.h jni/../../Classes/GameMain.h \
+ jni/../../Classes/common.h
 
 jni/../../Classes/scenes/PlayScene.h:
 
@@ -995,3 +996,7 @@ jni/../../Classes/VisibleRect.h:
 jni/../../Classes/components/DiamondSprite.h:
 
 jni/../../Classes/base/ShareVars.h:
+
+jni/../../Classes/GameMain.h:
+
+jni/../../Classes/common.h:

@@ -1,5 +1,6 @@
 #include "PlayScene.h"
 #include "base/ShareVars.h"
+#include "GameMain.h"
 
 using namespace std;
 
@@ -438,6 +439,11 @@ void PlayScene::checkFillDiamonds( CCObject *obj )
 	waitRemove.insert(waitRemove.begin(),r1.begin(),r1.end());
 	waitRemove.insert(waitRemove.begin(),r2.begin(),r2.end());
 	removeDiamonds(waitRemove);
+}
+
+void PlayScene::keyBackClicked()
+{
+	CCDirector::sharedDirector()->replaceScene(GameMain::scene());
 }
 
 
