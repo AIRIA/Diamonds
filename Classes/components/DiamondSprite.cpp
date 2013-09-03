@@ -88,22 +88,21 @@ bool DiamondSprite::isContainPoint( CCTouch *touch )
 
 void DiamondSprite::update( float delta )
 {
-	if(row<D_ROW){
+	if(row<(D_ROW-1)){
 		DiamondSprite *blowDiamond = PlayScene::diamonds[row+1][col];
-		if(isMoving==false&&blowDiamond==NULL){
+		if(isMoving==false&&canBeRemove==false&&blowDiamond==NULL){
 			isMoving = true;
-			CCLog("row %d,col %d",row+1,col);
-			CCActionInterval *moveDown = CCMoveTo::create(0.3f,ccp(getPositionX(),getPositionY()-DIAMOND_HEIGHT));
+			CCActionInterval *moveDown = CCMoveTo::create(0.15f,ccp(getPositionX(),getPositionY()-DIAMOND_HEIGHT));
 			CCCallFunc *resetCallFunc = CCCallFunc::create(this,callfunc_selector(DiamondSprite::updatePosition));
 			runAction(CCSequence::create(moveDown,resetCallFunc,NULL));
-			
+			PlayScene::diamonds[row][col] = NULL;
 		}
 	}
 }
 
 void DiamondSprite::updatePosition()
 {
-	this->row = this->row+1;
+	row++;
 	isMoving = false;
-	//PlayScene::diamonds[row][col] = this;
+	PlayScene::diamonds[row][col] = this;
 }

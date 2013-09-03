@@ -360,9 +360,11 @@ void PlayScene::fillNewDiamonds()
 	while(it!=waitRemove.end())
 	{
 		ds = *it;
+		ds->canBeRemove = true;
 		diamonds[ds->row][ds->col] = NULL;
 		it++;
 	}
+	waitRemove.clear();
 }
 
 
