@@ -17,5 +17,6 @@ USING_NS_CC_EXT;
 #define DIAMOND_WIDTH 60
 #define DIAMOND_HEIGHT 60
 #define D_TYPE 8
+#define DOWN_TIME 0.1f
 
 #endif // !_COMMON_H_

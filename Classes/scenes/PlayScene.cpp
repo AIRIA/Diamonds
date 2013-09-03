@@ -5,6 +5,7 @@ using namespace std;
 
 DiamondSprite *PlayScene::diamonds[D_ROW][D_COL] = {};
 DiamondSprite *PlayScene::rotateDiamonds[D_ROW][D_COL] = {};
+CCSpriteBatchNode *PlayScene::diamondBatch = NULL;
 
 bool PlayScene::init()
 {
@@ -41,7 +42,7 @@ void PlayScene::checkInitDiamonds()
 void PlayScene::createDiamonds()
 {
     srand(time(0));
-    CCSpriteBatchNode *diamondBatch = CCSpriteBatchNode::createWithTexture(SPRITE_FRAME(hdpi_jewel1.png)->getTexture());
+    diamondBatch = CCSpriteBatchNode::createWithTexture(SPRITE_FRAME(hdpi_jewel1.png)->getTexture());
     addChild(diamondBatch);
     for(int i=0; i<D_ROW; i++)
     {
@@ -222,6 +223,7 @@ void PlayScene::checkCanbeDes(CCObject *obj)
 void PlayScene::onEnter()
 {
     BaseScene::onEnter();
+	scheduleUpdate();
     CCNotificationCenter::sharedNotificationCenter()->addObserver(this,callfuncO_selector(PlayScene::checkCanbeDes),CHECK_CANBE_REMOVE,NULL);
 } 
 
@@ -365,6 +367,27 @@ void PlayScene::fillNewDiamonds()
 		it++;
 	}
 	waitRemove.clear();
+}
+
+void PlayScene::update( float delta )
+{
+	for(int i=0;i<D_COL;i++){
+		DiamondSprite *ds = diamonds[0][i];
+		if(ds==NULL){
+			int currentType = rand()%(D_TYPE-1)+1;
+			CCString *frameName = CCString::createWithFormat("hdpi_jewel%d.png",currentType);
+			ds = DiamondSprite::createDiamond(frameName->getCString());
+			ds->row = 0;
+			ds->col = i;
+			diamonds[0][i] = ds;
+			ds->type = currentType;
+			ds->setPosition(ccp(DIAMOND_WIDTH*(i+0.5),VisibleRect::leftTop().y+DIAMOND_HEIGHT*(0.5)));
+			CCPoint targetPoint = ccp(DIAMOND_WIDTH*(i+0.5),VisibleRect::leftTop().y-DIAMOND_HEIGHT*(0.5));
+			CCActionInterval *moveDown = CCMoveTo::create(DOWN_TIME,targetPoint);
+			diamondBatch->addChild(ds);
+			ds->runAction(moveDown);
+		}
+	}
 }
 
 

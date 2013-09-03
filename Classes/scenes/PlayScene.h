@@ -11,6 +11,7 @@ public:
 	vector<DiamondSprite*> waitRemove;
 	static DiamondSprite *diamonds[D_ROW][D_COL];
 	static DiamondSprite *rotateDiamonds[D_ROW][D_COL];
+	static CCSpriteBatchNode *diamondBatch;
 public:
 	/* 根据一个钻石获取他周围可以消除的钻石 */
 	vector<DiamondSprite*> getDiamonds(DiamondSprite *ds);
@@ -39,6 +40,7 @@ public:
     CREATE_FUNC(PlayScene);
 	virtual void onEnter();
 	virtual void onExit();
+	virtual void update(float delta);
 };
 
 #endif // !_PLAYSCENE_H_

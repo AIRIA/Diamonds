@@ -44,6 +44,7 @@ void DiamondSprite::changePostionHandler()
 bool DiamondSprite::ccTouchBegan( CCTouch *pTouch, CCEvent *pEvent )
 {
 	if(touchEnable&&isContainPoint(pTouch)){
+		CCLog("positionY:%f",getPositionY());
 		if(fstDiamond==NULL){
 			fstDiamond = this;
 		}else if(secDiamond==NULL){
@@ -92,10 +93,11 @@ void DiamondSprite::update( float delta )
 		DiamondSprite *blowDiamond = PlayScene::diamonds[row+1][col];
 		if(isMoving==false&&canBeRemove==false&&blowDiamond==NULL){
 			isMoving = true;
-			CCActionInterval *moveDown = CCMoveTo::create(0.15f,ccp(getPositionX(),getPositionY()-DIAMOND_HEIGHT));
+			CCActionInterval *moveDown = CCMoveTo::create(DOWN_TIME,ccp(getPositionX(),VisibleRect::leftTop().y-DIAMOND_HEIGHT*(row+1.5)));
 			CCCallFunc *resetCallFunc = CCCallFunc::create(this,callfunc_selector(DiamondSprite::updatePosition));
 			runAction(CCSequence::create(moveDown,resetCallFunc,NULL));
 			PlayScene::diamonds[row][col] = NULL;
+			PlayScene::diamonds[row+1][col] = this;
 		}
 	}
 }
@@ -104,5 +106,4 @@ void DiamondSprite::updatePosition()
 {
 	row++;
 	isMoving = false;
-	PlayScene::diamonds[row][col] = this;
 }
