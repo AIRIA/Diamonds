@@ -106,4 +106,5 @@ void DiamondSprite::updatePosition()
 {
 	row++;
 	isMoving = false;
+	CCNotificationCenter::sharedNotificationCenter()->postNotification(CHECK_ALL_CANBE_REMOVE);
 }

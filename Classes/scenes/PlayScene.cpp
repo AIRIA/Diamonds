@@ -225,6 +225,7 @@ void PlayScene::onEnter()
     BaseScene::onEnter();
 	scheduleUpdate();
     CCNotificationCenter::sharedNotificationCenter()->addObserver(this,callfuncO_selector(PlayScene::checkCanbeDes),CHECK_CANBE_REMOVE,NULL);
+	CCNotificationCenter::sharedNotificationCenter()->addObserver(this,callfuncO_selector(PlayScene::checkFillDiamonds),CHECK_ALL_CANBE_REMOVE,NULL);
 } 
 
 void PlayScene::onExit()
@@ -388,6 +389,55 @@ void PlayScene::update( float delta )
 			ds->runAction(moveDown);
 		}
 	}
+}
+
+vector<DiamondSprite*> PlayScene::checkAllCanbeRemove( DiamondSprite *source[D_ROW][D_COL] )
+{
+	vector<DiamondSprite*> tobeRemoveVec;
+	DiamondSprite **ds = source[0];
+	vector<DiamondSprite*> temp;
+	int num=1;
+	int prevType=0;
+	for(int row=0;row<D_ROW;row++)
+	{
+		for(int col=0;col<D_COL;col++)
+		{
+			DiamondSprite *diamondSpr = *ds;
+			if(diamondSpr==NULL){
+				continue;
+			}
+			int currentType = diamondSpr->type;
+			if(prevType==0)
+			{
+				prevType = currentType;
+			}else if (prevType==currentType)
+			{
+				num++;
+			}else if(num>2){
+				tobeRemoveVec.insert(tobeRemoveVec.begin(),temp.begin(),temp.end());
+				temp.clear();
+				num=1;
+				prevType = currentType;
+			}else{
+				num=1;
+				temp.clear();
+				prevType = currentType;
+			}
+			temp.push_back(diamondSpr);
+			ds++;
+		}
+	}
+	return tobeRemoveVec;
+}
+
+void PlayScene::checkFillDiamonds( CCObject *obj )
+{
+	vector<DiamondSprite*> r1 = checkAllCanbeRemove(diamonds);
+	setRotateDiamonds();
+	vector<DiamondSprite*> r2 = checkAllCanbeRemove(rotateDiamonds);
+	waitRemove.insert(waitRemove.begin(),r1.begin(),r1.end());
+	waitRemove.insert(waitRemove.begin(),r2.begin(),r2.end());
+	removeDiamonds(waitRemove);
 }
 
 

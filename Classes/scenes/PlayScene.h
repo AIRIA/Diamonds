@@ -34,6 +34,14 @@ public:
 	void removeDiamonds(vector<DiamondSprite*> dsVec);
 	/* 填补空位 */
 	void fillNewDiamonds();
+	/************************************************************************/
+	/*                 检测给定的表格数组中所有可以消除的钻石                 */
+	/************************************************************************/
+	vector<DiamondSprite*> checkAllCanbeRemove(DiamondSprite *source[D_ROW][D_COL]);
+	/************************************************************************/
+	/* 在填充了新的钻石后检查是否有可以消除的                                 */
+	/************************************************************************/
+	void checkFillDiamonds(CCObject *obj);
 public:
     virtual bool init();
 	virtual void draw();

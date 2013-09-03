@@ -7,6 +7,7 @@ extern DiamondSprite *secDiamond;
 extern bool touchEnable;
 
 static const char *CHECK_CANBE_REMOVE = "check_canbe_remove";
+static const char *CHECK_ALL_CANBE_REMOVE = "check_all_canbe_remove";
 
 #endif
 
