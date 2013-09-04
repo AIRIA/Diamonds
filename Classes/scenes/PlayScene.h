@@ -8,7 +8,7 @@
 class PlayScene:public BaseScene
 {
 public:
-	set<DiamondSprite*> waitRemove;
+	vector<DiamondSprite*> waitRemove;
 	static DiamondSprite *diamonds[D_ROW][D_COL];
 	static DiamondSprite *rotateDiamonds[D_ROW][D_COL];
 	static CCSpriteBatchNode *diamondBatch;
@@ -31,7 +31,7 @@ public:
 	/* 更改两个钻石在vector中的位置 */
 	void changePosInVector();
 	/* 移除钻石 */
-	void removeDiamonds(set<DiamondSprite*> dsVec);
+	void removeDiamonds(vector<DiamondSprite*> dsVec);
 	/* 填补空位 */
 	void fillNewDiamonds(CCNode *pSender);
 	/************************************************************************/

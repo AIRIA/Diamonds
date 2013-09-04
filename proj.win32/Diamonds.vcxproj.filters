@@ -16,6 +16,9 @@
     <Filter Include="Classes\scenes">
       <UniqueIdentifier>{0aeb07c0-6400-4e31-a23e-3c02dfe57722}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Classes\utils">
+      <UniqueIdentifier>{a2433581-0bcb-4644-b7c1-4dcfd30e9496}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -44,6 +47,9 @@
     </ClCompile>
     <ClCompile Include="..\Classes\base\ShareVars.cpp">
       <Filter>Classes\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\utils\Utils.cpp">
+      <Filter>Classes\utils</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -76,6 +82,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\base\ShareVars.h">
       <Filter>Classes\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\utils\Utils.h">
+      <Filter>Classes\utils</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

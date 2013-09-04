@@ -124,5 +124,8 @@ void DiamondSprite::updatePosition()
     row++;
     isMoving = false;
     DiamondSprite *blowDiamond = PlayScene::diamonds[row+1][col];
-//	CCNotificationCenter::sharedNotificationCenter()->postNotification(CHECK_ALL_CANBE_REMOVE);
+	if(blowDiamond){
+		CCNotificationCenter::sharedNotificationCenter()->postNotification(CHECK_ALL_CANBE_REMOVE);
+	}
+	
 }
