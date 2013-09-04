@@ -193,8 +193,8 @@ void PlayScene::checkCanbeDes(CCObject *obj)
     bool res = false;
 	vector<DiamondSprite*> r1 = getDiamonds(fstDiamond);
 	vector<DiamondSprite*> r2 = getDiamonds(secDiamond);
-	waitRemove.insert(waitRemove.begin(),r1.begin(),r1.end());
-	waitRemove.insert(waitRemove.begin(),r2.begin(),r2.end());
+	waitRemove.insert(r1.begin(),r1.end());
+	waitRemove.insert(r2.begin(),r2.end());
 	removeDiamonds(waitRemove);
 	
     if(r1.size()!=0||r2.size()!=0)
@@ -342,9 +342,9 @@ void PlayScene::changePosInVector()
 	diamonds[srow][scol] = fstDiamond;
 }
 
-void PlayScene::removeDiamonds( vector<DiamondSprite*> dsVec )
+void PlayScene::removeDiamonds( set<DiamondSprite*> dsVec )
 {
-	vector<DiamondSprite*>::iterator it = dsVec.begin();
+	set<DiamondSprite*>::iterator it = dsVec.begin();
 	while(it!=dsVec.end())
 	{
 		CCActionInterval *act = CCScaleTo::create(REMOVE_TIME,0);
@@ -360,7 +360,7 @@ void PlayScene::removeDiamonds( vector<DiamondSprite*> dsVec )
 void PlayScene::fillNewDiamonds(CCNode *pSender)
 {
 	pSender->removeFromParent();
-	vector<DiamondSprite*>::iterator it = waitRemove.begin();
+	set<DiamondSprite*>::iterator it = waitRemove.begin();
 	DiamondSprite *ds;
 	while(it!=waitRemove.end())
 	{
@@ -437,8 +437,8 @@ void PlayScene::checkFillDiamonds( CCObject *obj )
 	vector<DiamondSprite*> r1 = checkAllCanbeRemove(diamonds);
 	setRotateDiamonds();
 	vector<DiamondSprite*> r2 = checkAllCanbeRemove(rotateDiamonds);
-	waitRemove.insert(waitRemove.begin(),r1.begin(),r1.end());
-	waitRemove.insert(waitRemove.begin(),r2.begin(),r2.end());
+	waitRemove.insert(r1.begin(),r1.end());
+	waitRemove.insert(r2.begin(),r2.end());
 	removeDiamonds(waitRemove);
 }
 
