@@ -30,8 +30,8 @@ void DiamondSprite::changePosition()
         CCPoint p1 = ccp((fstDiamond->col+0.5)*DIAMOND_WIDTH,VisibleRect::top().y-(fstDiamond->row+0.5)*DIAMOND_HEIGHT);
 		CCPoint p2 = ccp((secDiamond->col+0.5)*DIAMOND_WIDTH,VisibleRect::top().y-(secDiamond->row+0.5)*DIAMOND_HEIGHT);
       //  CCPoint p2 = secDiamond->getPosition();
-        CCActionInterval *m1 = CCMoveTo::create(0.3f,p1);
-        CCActionInterval *m2 = CCMoveTo::create(0.3f,p2);
+        CCActionInterval *m1 = CCMoveTo::create(CHANGE_TIME,p1);
+        CCActionInterval *m2 = CCMoveTo::create(CHANGE_TIME,p2);
         CCCallFunc *moveCompFunc = CCCallFunc::create(fstDiamond,callfunc_selector(DiamondSprite::changePostionHandler));
         CCSequence *moveSeq = CCSequence::create(m1,moveCompFunc,NULL);
         fstDiamond->runAction(m2);
@@ -127,11 +127,10 @@ void DiamondSprite::updatePosition()
     if(blowDiamond==NULL)
     {
         CCLog("blow--nil");
-
     }
     else
     {
-        CCNotificationCenter::sharedNotificationCenter()->postNotification(CHECK_ALL_CANBE_REMOVE);
+       // CCNotificationCenter::sharedNotificationCenter()->postNotification(CHECK_ALL_CANBE_REMOVE);
     }
 
 }

@@ -19,5 +19,6 @@ USING_NS_CC_EXT;
 #define D_TYPE 8
 #define DOWN_TIME 0.1f
 #define REMOVE_TIME 0.2f
+#define CHANGE_TIME 0.2F
 
 #endif // !_COMMON_H_

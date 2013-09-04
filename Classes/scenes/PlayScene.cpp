@@ -207,12 +207,12 @@ void PlayScene::checkCanbeDes(CCObject *obj)
         touchEnable = false;
         int fstOrder = fstDiamond->getZOrder();
         int secOrder = secDiamond->getZOrder();
-		CCPoint p1 = ccp((fstDiamond->col+0.5)*DIAMOND_WIDTH,VisibleRect::top().y-(fstDiamond->row+0.5)*DIAMOND_HEIGHT);
-		CCPoint p2 = ccp((secDiamond->col+0.5)*DIAMOND_WIDTH,VisibleRect::top().y-(secDiamond->row+0.5)*DIAMOND_HEIGHT);
+		CCPoint p1 = ccp((secDiamond->col+0.5)*DIAMOND_WIDTH,VisibleRect::top().y-(secDiamond->row+0.5)*DIAMOND_HEIGHT);
+		CCPoint p2 = ccp((fstDiamond->col+0.5)*DIAMOND_WIDTH,VisibleRect::top().y-(fstDiamond->row+0.5)*DIAMOND_HEIGHT);
         fstDiamond->getParent()->reorderChild(fstDiamond,secOrder);
         secDiamond->getParent()->reorderChild(secDiamond,fstOrder);
-        CCActionInterval *m1 = CCMoveTo::create(0.3f,p1);
-        CCActionInterval *m2 = CCMoveTo::create(0.3f,p2);
+        CCActionInterval *m1 = CCMoveTo::create(CHANGE_TIME,p1);
+        CCActionInterval *m2 = CCMoveTo::create(CHANGE_TIME,p2);
         CCCallFunc *moveCompFunc = CCCallFunc::create(this,callfunc_selector(PlayScene::changePosHandler));
         CCSequence *moveSeq = CCSequence::create(m1,moveCompFunc,NULL);
         fstDiamond->runAction(m2);
