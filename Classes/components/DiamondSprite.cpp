@@ -29,7 +29,6 @@ void DiamondSprite::changePosition()
 		
         CCPoint p1 = ccp((fstDiamond->col+0.5)*DIAMOND_WIDTH,VisibleRect::top().y-(fstDiamond->row+0.5)*DIAMOND_HEIGHT);
 		CCPoint p2 = ccp((secDiamond->col+0.5)*DIAMOND_WIDTH,VisibleRect::top().y-(secDiamond->row+0.5)*DIAMOND_HEIGHT);
-      //  CCPoint p2 = secDiamond->getPosition();
         CCActionInterval *m1 = CCMoveTo::create(CHANGE_TIME,p1);
         CCActionInterval *m2 = CCMoveTo::create(CHANGE_TIME,p2);
         CCCallFunc *moveCompFunc = CCCallFunc::create(fstDiamond,callfunc_selector(DiamondSprite::changePostionHandler));
@@ -48,7 +47,7 @@ bool DiamondSprite::ccTouchBegan( CCTouch *pTouch, CCEvent *pEvent )
 {
     if(touchEnable&&isContainPoint(pTouch))
     {
-        CCLog("positionY:%f",getPositionY());
+       // CCLog("positionY:%f",getPositionY());
         if(fstDiamond==NULL)
         {
             fstDiamond = this;
@@ -109,6 +108,7 @@ void DiamondSprite::update( float delta )
         DiamondSprite *blowDiamond = PlayScene::diamonds[row+1][col];
         if(isMoving==false&&canBeRemove==false&&blowDiamond==NULL)
         {
+			movingDiamonds++;
             isMoving = true;
             CCActionInterval *moveDown = CCMoveTo::create(DOWN_TIME,ccp(getPositionX(),VisibleRect::leftTop().y-DIAMOND_HEIGHT*(row+1.5)));
             CCCallFunc *resetCallFunc = CCCallFunc::create(this,callfunc_selector(DiamondSprite::updatePosition));
@@ -122,10 +122,16 @@ void DiamondSprite::update( float delta )
 void DiamondSprite::updatePosition()
 {
     row++;
-    isMoving = false;
-    DiamondSprite *blowDiamond = PlayScene::diamonds[row+1][col];
-	if(blowDiamond){
-		CCNotificationCenter::sharedNotificationCenter()->postNotification(CHECK_ALL_CANBE_REMOVE);
-	}
-	
+    isMoving = false;  
+	movingDiamonds--;
+}
+
+void DiamondSprite::resetState()
+{
+	this->isMoving = false;
+}
+
+void DiamondSprite::destroy()
+{
+	getParent()->removeChild(this);
 }

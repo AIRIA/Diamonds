@@ -348,8 +348,8 @@ void PlayScene::removeDiamonds( vector<DiamondSprite*> dsVec )
 	while(it!=dsVec.end())
 	{
 		CCActionInterval *act = CCScaleTo::create(REMOVE_TIME,0);
-		(*it)->runAction(act);
-		//(*it)->setOpacity(128);
+		CCCallFunc *destroy = CCCallFunc::create(*it,callfunc_selector(DiamondSprite::destroy));
+		(*it)->runAction(CCSequence::create(act,destroy,NULL));
 		it++;
 	}
 	CCCallFuncN *fillNew = CCCallFuncN::create(this,callfuncN_selector(PlayScene::fillNewDiamonds));
@@ -359,7 +359,6 @@ void PlayScene::removeDiamonds( vector<DiamondSprite*> dsVec )
 
 void PlayScene::fillNewDiamonds(CCNode *pSender)
 {
-	pSender->removeFromParent();
 	vector<DiamondSprite*>::iterator it = waitRemove.begin();
 	DiamondSprite *ds;
 	while(it!=waitRemove.end())
@@ -377,6 +376,7 @@ void PlayScene::update( float delta )
 	for(int i=0;i<D_COL;i++){
 		DiamondSprite *ds = diamonds[0][i];
 		if(ds==NULL){
+			movingDiamonds++;
 			int currentType = rand()%(D_TYPE-1)+1;
 			CCString *frameName = CCString::createWithFormat("hdpi_jewel%d.png",currentType);
 			ds = DiamondSprite::createDiamond(frameName->getCString());
@@ -387,8 +387,9 @@ void PlayScene::update( float delta )
 			ds->setPosition(ccp(DIAMOND_WIDTH*(i+0.5),VisibleRect::leftTop().y+DIAMOND_HEIGHT*(0.5)));
 			CCPoint targetPoint = ccp(DIAMOND_WIDTH*(i+0.5),VisibleRect::leftTop().y-DIAMOND_HEIGHT*(0.5));
 			CCActionInterval *moveDown = CCMoveTo::create(DOWN_TIME,targetPoint);
+			CCCallFuncN *addComp = CCCallFuncN::create(this,callfuncN_selector(PlayScene::createComplete));
 			diamondBatch->addChild(ds);
-			ds->runAction(moveDown);
+			ds->runAction(CCSequence::create(moveDown,addComp,NULL));
 		}
 	}
 }
@@ -396,12 +397,14 @@ void PlayScene::update( float delta )
 vector<DiamondSprite*> PlayScene::checkAllCanbeRemove( DiamondSprite *source[D_ROW][D_COL] )
 {
 	vector<DiamondSprite*> tobeRemoveVec;
-	DiamondSprite **ds = source[0];
+	
 	vector<DiamondSprite*> temp;
-	int num=1;
-	int prevType=0;
+	
 	for(int row=0;row<D_ROW;row++)
 	{
+		DiamondSprite **ds = source[row];
+		int num=1;
+		int prevType=0;
 		for(int col=0;col<D_COL;col++)
 		{
 			DiamondSprite *diamondSpr = *ds;
@@ -445,6 +448,14 @@ void PlayScene::checkFillDiamonds( CCObject *obj )
 void PlayScene::keyBackClicked()
 {
 	CCDirector::sharedDirector()->replaceScene(GameMain::scene());
+}
+
+void PlayScene::createComplete(CCNode *pSender)
+{
+	movingDiamonds--;
+	if(movingDiamonds==0){
+		CCNotificationCenter::sharedNotificationCenter()->postNotification(CHECK_ALL_CANBE_REMOVE);
+	}
 }
 
 

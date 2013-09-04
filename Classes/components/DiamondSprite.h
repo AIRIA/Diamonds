@@ -17,6 +17,7 @@ public:
     /* 更改已经选中的两个钻石的位置 */
     static void changePosition();
     void changePostionHandler();
+	void destroy();
 	virtual void update(float delta);
     bool isContainPoint(CCTouch *pTouch);
     virtual void onEnter();
@@ -24,6 +25,7 @@ public:
     virtual void ccTouchMoved(CCTouch *pTouch, CCEvent *pEvent);
     virtual void ccTouchEnded(CCTouch *pTouch, CCEvent *pEvent);
     DiamondSprite():isMoving(false),canBeRemove(false) {};
+	void resetState();
 };
 
 #endif //!_DIAMONDSPRITE_H_
