@@ -33,7 +33,7 @@ public:
 	/* 移除钻石 */
 	void removeDiamonds(vector<DiamondSprite*> dsVec);
 	/* 填补空位 */
-	void fillNewDiamonds();
+	void fillNewDiamonds(CCNode *pSender);
 	/************************************************************************/
 	/*                 检测给定的表格数组中所有可以消除的钻石                 */
 	/************************************************************************/

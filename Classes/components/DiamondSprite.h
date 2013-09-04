@@ -5,9 +5,8 @@
 
 class DiamondSprite:public CCSprite,public CCTouchDelegate
 {
-private:
-	bool isMoving;
 public:
+	bool isMoving;
     int row;
     int col;
     int type;

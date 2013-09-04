@@ -207,8 +207,8 @@ void PlayScene::checkCanbeDes(CCObject *obj)
         touchEnable = false;
         int fstOrder = fstDiamond->getZOrder();
         int secOrder = secDiamond->getZOrder();
-        CCPoint p1 = fstDiamond->getPosition();
-        CCPoint p2 = secDiamond->getPosition();
+		CCPoint p1 = ccp((fstDiamond->col+0.5)*DIAMOND_WIDTH,VisibleRect::top().y-(fstDiamond->row+0.5)*DIAMOND_HEIGHT);
+		CCPoint p2 = ccp((secDiamond->col+0.5)*DIAMOND_WIDTH,VisibleRect::top().y-(secDiamond->row+0.5)*DIAMOND_HEIGHT);
         fstDiamond->getParent()->reorderChild(fstDiamond,secOrder);
         secDiamond->getParent()->reorderChild(secDiamond,fstOrder);
         CCActionInterval *m1 = CCMoveTo::create(0.3f,p1);
@@ -347,18 +347,19 @@ void PlayScene::removeDiamonds( vector<DiamondSprite*> dsVec )
 	vector<DiamondSprite*>::iterator it = dsVec.begin();
 	while(it!=dsVec.end())
 	{
-		CCActionInterval *act = CCScaleTo::create(0.5,0);
+		CCActionInterval *act = CCScaleTo::create(REMOVE_TIME,0);
 		(*it)->runAction(act);
 		//(*it)->setOpacity(128);
 		it++;
 	}
-	CCCallFunc *fillNew = CCCallFunc::create(this,callfunc_selector(PlayScene::fillNewDiamonds));
-	CCSequence *seq = CCSequence::create(CCDelayTime::create(0.5f),fillNew,NULL);
+	CCCallFuncN *fillNew = CCCallFuncN::create(this,callfuncN_selector(PlayScene::fillNewDiamonds));
+	CCSequence *seq = CCSequence::create(CCDelayTime::create(REMOVE_TIME),fillNew,NULL);
 	runAction(seq);
 }
 
-void PlayScene::fillNewDiamonds()
+void PlayScene::fillNewDiamonds(CCNode *pSender)
 {
+	pSender->removeFromParent();
 	vector<DiamondSprite*>::iterator it = waitRemove.begin();
 	DiamondSprite *ds;
 	while(it!=waitRemove.end())
