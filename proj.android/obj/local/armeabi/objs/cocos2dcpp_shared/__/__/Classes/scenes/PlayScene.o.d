@@ -331,7 +331,11 @@ obj/local/armeabi/objs/cocos2dcpp_shared/__/__/Classes/scenes/PlayScene.o: \
  /cygdrive/e/cocos/cocos2d-x-2.1.4/projects/Diamonds/proj.android/../../../extensions/Components/CCInputDelegate.h \
  jni/../../Classes/components/DiamondSprite.h \
  jni/../../Classes/base/ShareVars.h jni/../../Classes/GameMain.h \
- jni/../../Classes/common.h
+ jni/../../Classes/common.h \
+ /cygdrive/e/cocos/cocos2d-x-2.1.4/projects/Diamonds/proj.android/../../../plugin/publish/protocols/android/../include/ProtocolAds.h \
+ /cygdrive/e/cocos/cocos2d-x-2.1.4/projects/Diamonds/proj.android/../../../plugin/publish/protocols/android/../include/PluginProtocol.h \
+ /cygdrive/e/cocos/cocos2d-x-2.1.4/projects/Diamonds/proj.android/../../../plugin/publish/protocols/android/../include/PluginParam.h \
+ /cygdrive/e/cocos/cocos2d-x-2.1.4/projects/Diamonds/proj.android/../../../plugin/publish/protocols/android/../include/PluginManager.h
 
 jni/../../Classes/scenes/PlayScene.h:
 
@@ -1000,3 +1004,11 @@ jni/../../Classes/base/ShareVars.h:
 jni/../../Classes/GameMain.h:
 
 jni/../../Classes/common.h:
+
+/cygdrive/e/cocos/cocos2d-x-2.1.4/projects/Diamonds/proj.android/../../../plugin/publish/protocols/android/../include/ProtocolAds.h:
+
+/cygdrive/e/cocos/cocos2d-x-2.1.4/projects/Diamonds/proj.android/../../../plugin/publish/protocols/android/../include/PluginProtocol.h:
+
+/cygdrive/e/cocos/cocos2d-x-2.1.4/projects/Diamonds/proj.android/../../../plugin/publish/protocols/android/../include/PluginParam.h:
+
+/cygdrive/e/cocos/cocos2d-x-2.1.4/projects/Diamonds/proj.android/../../../plugin/publish/protocols/android/../include/PluginManager.h:

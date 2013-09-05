@@ -327,7 +327,11 @@ obj/local/armeabi/objs/cocos2dcpp_shared/__/__/Classes/AppDelegate.o: \
  /cygdrive/e/cocos/cocos2d-x-2.1.4/projects/Diamonds/proj.android/../../../extensions/Components/CCComAttribute.h \
  /cygdrive/e/cocos/cocos2d-x-2.1.4/projects/Diamonds/proj.android/../../../extensions/Components/CCComAudio.h \
  /cygdrive/e/cocos/cocos2d-x-2.1.4/projects/Diamonds/proj.android/../../../extensions/Components/CCComController.h \
- /cygdrive/e/cocos/cocos2d-x-2.1.4/projects/Diamonds/proj.android/../../../extensions/Components/CCInputDelegate.h
+ /cygdrive/e/cocos/cocos2d-x-2.1.4/projects/Diamonds/proj.android/../../../extensions/Components/CCInputDelegate.h \
+ /cygdrive/e/cocos/cocos2d-x-2.1.4/projects/Diamonds/proj.android/../../../plugin/publish/protocols/android/../include/ProtocolAds.h \
+ /cygdrive/e/cocos/cocos2d-x-2.1.4/projects/Diamonds/proj.android/../../../plugin/publish/protocols/android/../include/PluginProtocol.h \
+ /cygdrive/e/cocos/cocos2d-x-2.1.4/projects/Diamonds/proj.android/../../../plugin/publish/protocols/android/../include/PluginParam.h \
+ /cygdrive/e/cocos/cocos2d-x-2.1.4/projects/Diamonds/proj.android/../../../plugin/publish/protocols/android/../include/PluginManager.h
 
 jni/../../Classes/AppDelegate.h:
 
@@ -988,3 +992,11 @@ jni/../../Classes/VisibleRect.h:
 /cygdrive/e/cocos/cocos2d-x-2.1.4/projects/Diamonds/proj.android/../../../extensions/Components/CCComController.h:
 
 /cygdrive/e/cocos/cocos2d-x-2.1.4/projects/Diamonds/proj.android/../../../extensions/Components/CCInputDelegate.h:
+
+/cygdrive/e/cocos/cocos2d-x-2.1.4/projects/Diamonds/proj.android/../../../plugin/publish/protocols/android/../include/ProtocolAds.h:
+
+/cygdrive/e/cocos/cocos2d-x-2.1.4/projects/Diamonds/proj.android/../../../plugin/publish/protocols/android/../include/PluginProtocol.h:
+
+/cygdrive/e/cocos/cocos2d-x-2.1.4/projects/Diamonds/proj.android/../../../plugin/publish/protocols/android/../include/PluginParam.h:
+
+/cygdrive/e/cocos/cocos2d-x-2.1.4/projects/Diamonds/proj.android/../../../plugin/publish/protocols/android/../include/PluginManager.h:

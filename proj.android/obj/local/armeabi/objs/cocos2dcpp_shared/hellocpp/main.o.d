@@ -205,7 +205,8 @@ obj/local/armeabi/objs/cocos2dcpp_shared/hellocpp/main.o: \
  /cygdrive/e/cocos/cocos2d-x-2.1.4/projects/Diamonds/proj.android/../../../cocos2dx/support/component/CCComponentContainer.h \
  /cygdrive/e/cocos/cocos2d-x-2.1.4/projects/Diamonds/proj.android/../../../cocos2dx/include/CCEventType.h \
  /cygdrive/e/cocos/cocos2d-x-2.1.4/projects/Diamonds/proj.android/../../../cocos2dx/platform/android/jni/JniHelper.h \
- /cygdrive/e/cocos/android-ndk-r8e/platforms/android-8/arch-arm/usr/include/jni.h
+ /cygdrive/e/cocos/android-ndk-r8e/platforms/android-8/arch-arm/usr/include/jni.h \
+ /cygdrive/e/cocos/cocos2d-x-2.1.4/projects/Diamonds/proj.android/../../../plugin/publish/protocols/android/PluginJniHelper.h
 
 jni/../../Classes/AppDelegate.h:
 
@@ -620,3 +621,5 @@ jni/../../Classes/AppDelegate.h:
 /cygdrive/e/cocos/cocos2d-x-2.1.4/projects/Diamonds/proj.android/../../../cocos2dx/platform/android/jni/JniHelper.h:
 
 /cygdrive/e/cocos/android-ndk-r8e/platforms/android-8/arch-arm/usr/include/jni.h:
+
+/cygdrive/e/cocos/cocos2d-x-2.1.4/projects/Diamonds/proj.android/../../../plugin/publish/protocols/android/PluginJniHelper.h:

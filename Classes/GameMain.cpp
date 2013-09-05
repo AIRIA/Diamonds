@@ -1,9 +1,24 @@
 #include "GameMain.h"
 #include "components\MenuWithLabel.h"
 #include "scenes\PlayScene.h"
+void MyAdsListener::onAdsResult(AdsResultCode code, const char* msg)
+{
+	CCLog("OnAdsResult, code : %d, msg : %s", code, msg);
+}
 
+void MyAdsListener::onPlayerGetPoints(cocos2d::plugin::ProtocolAds* pAdsPlugin, int points)
+{
+	CCLog("Player get points : %d", points);
+	if (pAdsPlugin != NULL) {
+		pAdsPlugin->spendPoints(points);
+	}
+}
+
+
+//--------------------------------------------------
 CCScene *GameMain::scene()
 {
+	
     CCScene *mainScene = CCScene::create();
     CCLayer *mainLayer = GameMain::create();
     mainScene->addChild(mainLayer);
@@ -16,6 +31,14 @@ bool GameMain::init()
     do
     {
         CC_BREAK_IF(!CCLayer::init());
+		m_pAds = dynamic_cast<ProtocolAds*>(PluginManager::getInstance()->loadPlugin("AdsAdmob"));
+		m_pAdsListener = new MyAdsListener();
+		TAdsDeveloperInfo devConfig;
+		devConfig["AdmobID"] = "a15227e92acfd15";
+		m_pAds->configDeveloperInfo(devConfig);
+		m_pAds->setAdsListener(m_pAdsListener);
+		m_pAds->setDebugMode(true);
+		m_pAds->showAds(ProtocolAds::kBannerAd,0,ProtocolAds::kPosBottom);
 		setKeypadEnabled(true);
         initUI();
         res = true;
