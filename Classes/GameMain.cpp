@@ -1,24 +1,27 @@
 #include "GameMain.h"
 #include "components\MenuWithLabel.h"
 #include "scenes\PlayScene.h"
+
+#if (CC_TARGET_PLATFORM==CC_PLATFORM_ANDROID)
 void MyAdsListener::onAdsResult(AdsResultCode code, const char* msg)
 {
-	CCLog("OnAdsResult, code : %d, msg : %s", code, msg);
+    CCLog("OnAdsResult, code : %d, msg : %s", code, msg);
 }
 
 void MyAdsListener::onPlayerGetPoints(cocos2d::plugin::ProtocolAds* pAdsPlugin, int points)
 {
-	CCLog("Player get points : %d", points);
-	if (pAdsPlugin != NULL) {
-		pAdsPlugin->spendPoints(points);
-	}
+    CCLog("Player get points : %d", points);
+    if (pAdsPlugin != NULL)
+    {
+        pAdsPlugin->spendPoints(points);
+    }
 }
-
+#endif
 
 //--------------------------------------------------
 CCScene *GameMain::scene()
 {
-	
+
     CCScene *mainScene = CCScene::create();
     CCLayer *mainLayer = GameMain::create();
     mainScene->addChild(mainLayer);
@@ -31,15 +34,17 @@ bool GameMain::init()
     do
     {
         CC_BREAK_IF(!CCLayer::init());
-		m_pAds = dynamic_cast<ProtocolAds*>(PluginManager::getInstance()->loadPlugin("AdsAdmob"));
-		m_pAdsListener = new MyAdsListener();
-		TAdsDeveloperInfo devConfig;
-		devConfig["AdmobID"] = "a15227e92acfd15";
-		m_pAds->configDeveloperInfo(devConfig);
-		m_pAds->setAdsListener(m_pAdsListener);
-		m_pAds->setDebugMode(true);
-		m_pAds->showAds(ProtocolAds::kBannerAd,0,ProtocolAds::kPosBottom);
-		setKeypadEnabled(true);
+#if (CC_TARGET_PLATFORM==CC_PLATFORM_ANDROID)
+        m_pAds = dynamic_cast<ProtocolAds*>(PluginManager::getInstance()->loadPlugin("AdsAdmob"));
+        m_pAdsListener = new MyAdsListener();
+        TAdsDeveloperInfo devConfig;
+        devConfig["AdmobID"] = "a15227e92acfd15";
+        m_pAds->configDeveloperInfo(devConfig);
+        m_pAds->setAdsListener(m_pAdsListener);
+        m_pAds->setDebugMode(true);
+        m_pAds->showAds(ProtocolAds::kBannerAd,0,ProtocolAds::kPosBottom);
+        setKeypadEnabled(true);
+#endif
         initUI();
         res = true;
     }
@@ -73,14 +78,14 @@ void GameMain::initUI()
 
 void GameMain::newGameHandler(CCObject *pSender)
 {
-	CCDirector::sharedDirector()->replaceScene(PlayScene::create());
+    CCDirector::sharedDirector()->replaceScene(PlayScene::create());
 }
 
 void GameMain::keyBackClicked()
 {
-	CCDirector::sharedDirector()->end();
+    CCDirector::sharedDirector()->end();
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
-	exit(0);
+    exit(0);
 #endif
 }
 
